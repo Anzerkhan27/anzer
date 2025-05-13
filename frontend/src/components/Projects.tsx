@@ -9,7 +9,7 @@ type Project = {
   image?: string;
   github_link?: string;
   live_link?: string;
-  techStack?: string[];
+  techStack: string[];
 };
 
 const Projects = () => {
@@ -20,24 +20,24 @@ const Projects = () => {
   const [allTags, setAllTags] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
 
-  // Fetch projects from backend
   useEffect(() => {
     fetch('http://127.0.0.1:8000/api/projects/')
       .then((res) => res.json())
       .then((data) => {
-        const enriched = data.map((project: Project) => ({
+        const enriched: Project[] = data.map((project: any) => ({
           ...project,
           techStack: project.tech_stack
-            ? project.tech_stack.split(',').map((s) => s.trim())
+            ? project.tech_stack.split(',').map((s: string) => s.trim())
             : [],
         }));
         setProjects(enriched);
         setFilteredProjects(enriched);
         setLoading(false);
 
-        // Extract all unique tags
         const tags = new Set<string>();
-        enriched.forEach((p) => p.techStack?.forEach((t) => tags.add(t)));
+        enriched.forEach((p: Project) =>
+          p.techStack.forEach((t: string) => tags.add(t))
+        );
         setAllTags(['All', ...Array.from(tags).sort()]);
       })
       .catch((err) => {
@@ -46,13 +46,13 @@ const Projects = () => {
       });
   }, []);
 
-  // Filter logic on query or tag change
   useEffect(() => {
     const q = query.toLowerCase();
 
     const filtered = projects.filter((project) => {
-      const matchesQuery = [project.title, project.description, ...project.techStack]
-        .some((field) => field.toLowerCase().includes(q));
+      const matchesQuery = [project.title, project.description, ...project.techStack].some((field) =>
+        field.toLowerCase().includes(q)
+      );
 
       const matchesTag =
         selectedTag === 'All' || project.techStack.includes(selectedTag);
@@ -79,7 +79,7 @@ const Projects = () => {
           Projects
         </motion.h2>
 
-        {/* 🔍 Search Bar */}
+        {/* Search */}
         <div className="sticky top-4 z-10 bg-gray-100 dark:bg-gray-800 mb-6 py-2">
           <input
             type="text"
@@ -90,7 +90,7 @@ const Projects = () => {
           />
         </div>
 
-        {/* 🎛 Filter Buttons */}
+        {/* Filters */}
         <div className="flex flex-wrap gap-3 mb-10">
           {allTags.map((tag) => (
             <button
@@ -107,7 +107,7 @@ const Projects = () => {
           ))}
         </div>
 
-        {/* 🧠 Filtered Projects */}
+        {/* Projects */}
         {loading ? (
           <div className="text-center text-gray-500 dark:text-gray-400">
             Loading projects...
@@ -144,12 +144,16 @@ const Projects = () => {
                   {project.description}
                 </p>
 
-                {project.techStack && project.techStack.length > 0 && (
+                {project.techStack.length > 0 && (
                   <div className="flex flex-wrap gap-2 mb-4">
-                      {Array.isArray(project.techStack) &&
-                        project.techStack.map((tech, idx) => (
-                          <span key={idx}>...</span>
-                      ))}
+                    {project.techStack.map((tech, idx) => (
+                      <span
+                        key={idx}
+                        className="text-sm bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-100 px-2 py-1 rounded shadow-sm"
+                      >
+                        {tech}
+                      </span>
+                    ))}
                   </div>
                 )}
 
