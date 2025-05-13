@@ -1,0 +1,47 @@
+[
+  {
+    "id": 1,
+    "title": "AUDITSU – Automated Accessibility Auditing Platform",
+    "description": "A fully automated accessibility auditing platform for Android apps that scans UI elements at runtime, extracts metadata using Appium + ADB, and performs dynamic compliance checks based on WCAG and EN 301 549. Powered by LLaVA (Vision LLM) to generate alt-texts and validate screen elements. Built as part of an MSc AI project and evolved into a funded startup.",
+    "tech_stack": "Python, FastAPI, Appium, ADB, Bash, Android Emulator, DigitalOcean, LLaVA",
+    "image": "/project_images/auditsu_preview.png",
+    "github_link": "https://github.com/anzerkhan/auditsu",
+    "live_link": "https://auditsu.anzerkhan.dev"
+  },
+  {
+    "id": 2,
+    "title": "Team Ray – Official Website for the Aerospace Society",
+    "description": "The official full-stack website for Team Ray, the University of Huddersfield’s first aerospace society. Built to showcase projects, team members, news, and collect join queries. Features a responsive React + Tailwind frontend connected to a Django REST API backend, with dynamic content served from a PostgreSQL database and images hosted on Cloudinary CDN.",
+    "tech_stack": "React, Vite, Tailwind CSS, Django, Django REST Framework, PostgreSQL, Cloudinary, Railway, Cloudflare",
+    "image": "/project_images/teamray_preview.png",
+    "github_link": "https://github.com/AnzerKhan27/team-ray-frontend",
+    "live_link": "https://teamray.team"
+  },
+  {
+    "id": 3,
+    "title": "Mars Rover QR Code Detection & Image Processing",
+    "description": "A mission-critical computer vision module built for Team Ray’s Mars Rover to detect, decode, and select the smallest valid QR code from images captured on simulated Martian terrain. Used in the UKSEDS Olympus Rover Trials 2024–25 to automate geological point-of-interest submissions. Includes a live Streamlit app and a CLI pipeline with real QR decoding, image annotation, and JSON summary generation.",
+    "tech_stack": "Python, OpenCV, Pyzbar, Streamlit, Docker, Railway",
+    "image": "/project_images/qr_rover_scanner.png",
+    "github_link": "https://github.com/AnzerKhan27/image-processing-module",
+    "live_link": "https://imageprocessingmodule-production.up.railway.app/"
+  },
+  {
+    "id": 4,
+    "title": "MedSeg ML Pipeline – Brain Tumour Detection from MRI",
+    "description": "A production-grade machine learning pipeline for classifying brain MRI slices for tumor presence using CNNs. Features end-to-end automation from dataset download (via KaggleHub) and preprocessing to training, inference, and metrics evaluation. Designed with modular scripts, Prefect orchestration, and `.npz` data standardization for healthcare AI workflows.",
+    "tech_stack": "TensorFlow, Python, Prefect, KaggleHub, Scikit-learn, Matplotlib",
+    "image": "/project_images/brain_mri_pipeline.png",
+    "github_link": "https://github.com/AnzerKhan27/medseg-ml-pipeline",
+    "live_link": ""
+  },
+  {
+    "id": 5,
+    "title": "EBOOK – Online Library System with Credit & Borrowing Logic",
+    "description": "A full-featured Laravel-based online library system with user/admin separation, credit-based book borrowing, automated email reminders, role management, and Google login integration. Users can borrow, extend, and return books while admins manage authors, books, and user roles. Built with scheduled tasks, custom commands, and full CRUD capabilities for scalable deployment.",
+    "tech_stack": "Laravel 9, PHP 8.1, MySQL, Bootstrap 5, Vite, Vue, Mailtrap",
+    "image": "/project_images/ebook_preview.png",
+    "github_link": "https://github.com/AnzerKhan27/ebook-library-laravel",
+    "live_link": "https://ebook-laravel-final-production.up.railway.app"
+  }
+]
