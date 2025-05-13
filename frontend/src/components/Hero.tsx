@@ -1,4 +1,5 @@
 import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa';
+import { Typewriter } from 'react-simple-typewriter';
 
 const Hero = () => {
   return (
@@ -10,15 +11,30 @@ const Hero = () => {
         <h1 className="text-5xl md:text-6xl font-bold mb-4">
           Anzer Khan
         </h1>
+
         <p className="text-xl md:text-2xl text-gray-300 mb-6">
-          Full-Stack Engineer | AI & Accessibility Innovator
+          <Typewriter
+            words={[
+              'Full-Stack Engineer',
+              'AI & Accessibility Innovator',
+              'Space Software Dev',
+            ]}
+            loop={0}
+            cursor
+            cursorStyle="_"
+            typeSpeed={70}
+            deleteSpeed={50}
+            delaySpeed={1500}
+          />
         </p>
+
         <p className="text-md md:text-lg text-gray-400 mb-8">
-          I build accessible, performant systems — from AI-driven accessibility platforms to mission software for autonomous rovers.
+          I build accessible, performant systems — from AI-driven accessibility platforms
+          to mission software for autonomous rovers.
         </p>
 
         {/* 👇 Contact Icons Bar */}
-        <div className="flex justify-center gap-6 mb-10">
+        <div className="flex justify-center gap-6 mb-8">
           <a
             href="https://linkedin.com/in/anzer-khan-31a14a209"
             target="_blank"
@@ -46,12 +62,37 @@ const Hero = () => {
           </a>
         </div>
 
-        <a
-          href="#projects"
-          className="inline-block px-6 py-3 bg-white text-black font-semibold rounded-lg shadow-lg hover:bg-gray-200 transition"
-        >
-          View My Work
-        </a>
+        {/* 👇 Action Buttons */}
+        <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-10">
+          <a
+            href="#projects"
+            className="px-6 py-3 bg-white text-black font-semibold rounded-lg shadow-lg hover:bg-gray-200 transition"
+          >
+            View My Work
+          </a>
+          <a
+            href="/cv.pdf" // Replace with actual path or drive link
+            className="px-6 py-3 border border-white text-white font-semibold rounded-lg hover:bg-white hover:text-black transition"
+          >
+            Download CV
+          </a>
+        </div>
+
+        {/* 👇 Achievement Stats */}
+        <div className="flex justify-center gap-8 text-gray-400 text-sm sm:text-base">
+          <div>
+            <span className="block text-white text-xl font-bold">3+</span>
+            Years Experience
+          </div>
+          <div>
+            <span className="block text-white text-xl font-bold">8+</span>
+            Projects
+          </div>
+          <div>
+            <span className="block text-white text-xl font-bold">4</span>
+            Published Tools
+          </div>
+        </div>
       </div>
     </section>
   );
