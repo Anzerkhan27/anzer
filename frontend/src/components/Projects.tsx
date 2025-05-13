@@ -1,36 +1,24 @@
-import React from 'react';
+import { useEffect, useState } from 'react';
 
 type Project = {
+  id: number;
   title: string;
   description: string;
-  techStack: string[];
-  link?: string;
+  github_link?: string;
+  live_link?: string;
+  techStack?: string[]; // Optional for future backend inclusion
 };
 
-const projects: Project[] = [
-  {
-    title: 'AUDITSU – Automated Accessibility Auditing',
-    description:
-      'AI-powered platform that dynamically audits Android apps for accessibility compliance using Appium, machine learning, and cloud infrastructure. Secured industry funding and AI Startup of the Year nomination.',
-    techStack: ['Python', 'FastAPI', 'Appium', 'OCR', 'LLM', 'DigitalOcean'],
-    link: 'https://github.com/Anzerkhan27/auditsu',
-  },
-  {
-    title: 'MedSeg – MRI Tumour Detection Pipeline',
-    description:
-      'Production-style ML pipeline to classify and segment brain tumours from MRI scans using CNN and ResUNet. Designed for reproducibility and orchestration using Prefect.',
-    techStack: ['TensorFlow', 'Prefect', 'CNN', 'ResUNet', 'Python'],
-    link: 'https://github.com/Anzerkhan27/medseg-ml-pipeline',
-  },
-  {
-    title: 'Team Ray Rover Systems',
-    description:
-      'Built real-time telemetry systems and computer vision pipelines for QR code detection and rover navigation in the UKSEDS Olympus Rover Trials 2025.',
-    techStack: ['Python', 'OpenCV', 'Streamlit', 'Docker'],
-  },
-];
-
 const Projects = () => {
+  const [projects, setProjects] = useState<Project[]>([]);
+
+  useEffect(() => {
+    fetch('http://127.0.0.1:8000/api/projects/')
+      .then((res) => res.json())
+      .then((data) => setProjects(data))
+      .catch((err) => console.error('Error fetching projects:', err));
+  }, []);
+
   return (
     <section
       id="projects"
@@ -42,9 +30,9 @@ const Projects = () => {
         </h2>
 
         <div className="grid gap-10 md:grid-cols-2">
-          {projects.map((project, index) => (
+          {projects.map((project) => (
             <div
-              key={index}
+              key={project.id}
               className="bg-white dark:bg-gray-900 rounded-xl shadow-lg p-6 border border-gray-200 dark:border-gray-700 hover:shadow-xl transition"
             >
               <h3 className="text-2xl font-semibold text-gray-900 dark:text-white mb-2">
@@ -53,24 +41,40 @@ const Projects = () => {
               <p className="text-gray-700 dark:text-gray-300 mb-3">
                 {project.description}
               </p>
-              <div className="flex flex-wrap gap-2 mb-3">
-                {project.techStack.map((tech, idx) => (
-                  <span
-                    key={idx}
-                    className="text-sm bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 px-2 py-1 rounded"
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
-              {project.link && (
+
+              {/* Tech stack can be added when backend supports it */}
+              {project.techStack && (
+                <div className="flex flex-wrap gap-2 mb-3">
+                  {project.techStack.map((tech, idx) => (
+                    <span
+                      key={idx}
+                      className="text-sm bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 px-2 py-1 rounded"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              )}
+
+              {project.github_link && (
                 <a
-                  href={project.link}
+                  href={project.github_link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-block text-blue-600 dark:text-blue-400 font-medium hover:underline"
+                  className="inline-block text-blue-600 dark:text-blue-400 font-medium hover:underline mr-4"
                 >
                   View Code →
+                </a>
+              )}
+
+              {project.live_link && (
+                <a
+                  href={project.live_link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block text-green-600 dark:text-green-400 font-medium hover:underline"
+                >
+                  Live Demo →
                 </a>
               )}
             </div>
