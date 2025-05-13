@@ -13,7 +13,9 @@ type Project = {
 
 const Projects = () => {
   const [projects, setProjects] = useState<Project[]>([]);
+  const [filteredProjects, setFilteredProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
+  const [query, setQuery] = useState('');
 
   useEffect(() => {
     fetch('http://127.0.0.1:8000/api/projects/')
@@ -26,6 +28,7 @@ const Projects = () => {
             : [],
         }));
         setProjects(enriched);
+        setFilteredProjects(enriched);
         setLoading(false);
       })
       .catch((err) => {
@@ -34,23 +37,50 @@ const Projects = () => {
       });
   }, []);
 
+  // 🔍 Filter projects based on the query
+  useEffect(() => {
+    const lowerQuery = query.toLowerCase();
+    const filtered = projects.filter((project) =>
+      [project.title, project.description, ...project.techStack].some((field) =>
+        field.toLowerCase().includes(lowerQuery)
+      )
+    );
+    setFilteredProjects(filtered);
+  }, [query, projects]);
+
   return (
     <section
       id="projects"
-      className="bg-gray-100 dark:bg-gray-800 py-20 px-6 sm:px-12 md:px-24 lg:px-32"
+      className="bg-gray-100 dark:bg-gray-800 py-20 px-4 sm:px-8 md:px-12 lg:px-16"
     >
-      <div className="max-w-6xl mx-auto">
-        <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-10">
+      <div className="max-w-7xl mx-auto">
+        <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-8">
           Projects
         </h2>
 
+        {/* 🔍 SEARCH BAR */}
+        <div className="sticky top-4 z-10 bg-gray-100 dark:bg-gray-800 mb-8 py-4">
+          <input
+            type="text"
+            placeholder="🔍 Search by title, description, or tech..."
+            className="w-full sm:w-1/2 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-100"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+          />
+        </div>
+
+        {/* 💻 PROJECT GRID */}
         {loading ? (
           <div className="text-center text-gray-500 dark:text-gray-400">
             Loading projects...
           </div>
+        ) : filteredProjects.length === 0 ? (
+          <div className="text-center text-gray-500 dark:text-gray-400">
+            No projects found.
+          </div>
         ) : (
-          <div className="grid gap-10 md:grid-cols-2">
-            {projects.map((project) => (
+          <div className="grid gap-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+            {filteredProjects.map((project) => (
               <div
                 key={project.id}
                 className="bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-700 shadow-md hover:shadow-2xl hover:-translate-y-1 transform transition duration-300 p-6"
