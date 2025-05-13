@@ -4,9 +4,11 @@ type Project = {
   id: number;
   title: string;
   description: string;
+  tech_stack: string; // Backend sends this as comma-separated string
+  image?: string;
   github_link?: string;
   live_link?: string;
-  techStack?: string[]; // Optional for future backend inclusion
+  techStack?: string[]; // Frontend-only parsed array
 };
 
 const Projects = () => {
@@ -15,7 +17,15 @@ const Projects = () => {
   useEffect(() => {
     fetch('http://127.0.0.1:8000/api/projects/')
       .then((res) => res.json())
-      .then((data) => setProjects(data))
+      .then((data) => {
+        const enriched = data.map((project: Project) => ({
+          ...project,
+          techStack: project.tech_stack
+            ? project.tech_stack.split(',').map((s) => s.trim())
+            : [],
+        }));
+        setProjects(enriched);
+      })
       .catch((err) => console.error('Error fetching projects:', err));
   }, []);
 
@@ -35,15 +45,23 @@ const Projects = () => {
               key={project.id}
               className="bg-white dark:bg-gray-900 rounded-xl shadow-lg p-6 border border-gray-200 dark:border-gray-700 hover:shadow-xl transition"
             >
+              {project.image && (
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  className="w-full h-48 object-cover rounded mb-4"
+                />
+              )}
+
               <h3 className="text-2xl font-semibold text-gray-900 dark:text-white mb-2">
                 {project.title}
               </h3>
+
               <p className="text-gray-700 dark:text-gray-300 mb-3">
                 {project.description}
               </p>
 
-              {/* Tech stack can be added when backend supports it */}
-              {project.techStack && (
+              {project.techStack && project.techStack.length > 0 && (
                 <div className="flex flex-wrap gap-2 mb-3">
                   {project.techStack.map((tech, idx) => (
                     <span
@@ -56,27 +74,28 @@ const Projects = () => {
                 </div>
               )}
 
-              {project.github_link && (
-                <a
-                  href={project.github_link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-block text-blue-600 dark:text-blue-400 font-medium hover:underline mr-4"
-                >
-                  View Code →
-                </a>
-              )}
-
-              {project.live_link && (
-                <a
-                  href={project.live_link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-block text-green-600 dark:text-green-400 font-medium hover:underline"
-                >
-                  Live Demo →
-                </a>
-              )}
+              <div className="mt-4 space-x-4">
+                {project.github_link && (
+                  <a
+                    href={project.github_link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-block text-blue-600 dark:text-blue-400 font-medium hover:underline"
+                  >
+                    View Code →
+                  </a>
+                )}
+                {project.live_link && (
+                  <a
+                    href={project.live_link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-block text-green-600 dark:text-green-400 font-medium hover:underline"
+                  >
+                    Live Demo →
+                  </a>
+                )}
+              </div>
             </div>
           ))}
         </div>
