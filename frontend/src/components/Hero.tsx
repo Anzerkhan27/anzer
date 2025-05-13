@@ -45,7 +45,7 @@ const Hero = () => {
             <span className="hidden sm:inline">LinkedIn</span>
           </a>
           <a
-            href="https://github.com/anzerkhan"
+            href="https://github.com/Anzerkhan27"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2 hover:text-gray-300 transition"
@@ -54,7 +54,7 @@ const Hero = () => {
             <span className="hidden sm:inline">GitHub</span>
           </a>
           <a
-            href="mailto:anzer@example.com"
+            href="mailto:anzerkhan27@gmail.com"
             className="flex items-center gap-2 hover:text-red-400 transition"
           >
             <FaEnvelope className="text-xl" />
@@ -71,7 +71,7 @@ const Hero = () => {
             View My Work
           </a>
           <a
-            href="/cv.pdf" // Replace with actual path or drive link
+            href="/CV_Anzer.pdf" // Replace with actual path or drive link
             className="px-6 py-3 border border-white text-white font-semibold rounded-lg hover:bg-white hover:text-black transition"
           >
             Download CV
