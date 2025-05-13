@@ -135,3 +135,9 @@ CORS_ALLOW_ALL_ORIGINS = True
 # CORS_ALLOWED_ORIGINS = [
 #     "http://localhost:5173",
 # ]
+
+
+import os
+
+MEDIA_URL = '/project_images/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'project_images')
