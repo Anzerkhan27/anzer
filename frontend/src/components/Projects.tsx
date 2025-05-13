@@ -20,31 +20,36 @@ const Projects = () => {
   const [allTags, setAllTags] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    fetch('/projects.json')
-      .then((res) => res.json())
-      .then((data) => {
-        const enriched: Project[] = data.map((project: any) => ({
-          ...project,
-          techStack: project.tech_stack
-            ? project.tech_stack.split(',').map((s: string) => s.trim())
-            : [],
-        }));
-        setProjects(enriched);
-        setFilteredProjects(enriched);
-        setLoading(false);
+useEffect(() => {
+  fetch('/projects.json')
+    .then((res) => res.json())
+    .then((data) => {
+      const enriched: Project[] = data.map((project: any) => ({
+        ...project,
+        techStack: project.tech_stack
+          ? project.tech_stack.split(',').map((s: string) => s.trim())
+          : [],
+      }));
+      setProjects(enriched);
+      setFilteredProjects(enriched);
+      setLoading(false);
 
-        const tags = new Set<string>();
-        enriched.forEach((p: Project) =>
-          p.techStack.forEach((t: string) => tags.add(t))
-        );
-        setAllTags(['All', ...Array.from(tags).sort()]);
-      })
-      .catch((err) => {
-        console.error('Error loading static projects.json:', err);
-        setLoading(false);
+      // 🚨 NEW: Collect only the first tag from each project
+      const tagSet = new Set<string>();
+      enriched.forEach((p) => {
+        if (p.techStack && p.techStack[0]) {
+          tagSet.add(p.techStack[0]);
+        }
       });
-  }, []);
+
+      const firstFiveTags = ['All', ...Array.from(tagSet).slice(0, 5)];
+      setAllTags(firstFiveTags);
+    })
+    .catch((err) => {
+      console.error('Error loading static projects.json:', err);
+      setLoading(false);
+    });
+}, []);
 
 
   useEffect(() => {
@@ -147,7 +152,7 @@ const Projects = () => {
 
                 {project.techStack.length > 0 && (
                   <div className="flex flex-wrap gap-2 mb-4">
-                    {project.techStack.map((tech, idx) => (
+                    {project.techStack.slice(0,3).map((tech, idx) => (
                       <span
                         key={idx}
                         className="text-sm bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-100 px-2 py-1 rounded shadow-sm"
