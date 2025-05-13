@@ -4,7 +4,7 @@
     "title": "AUDITSU – Automated Accessibility Auditing Platform",
     "description": "A fully automated accessibility auditing platform for Android apps that scans UI elements at runtime, extracts metadata using Appium + ADB, and performs dynamic compliance checks based on WCAG and EN 301 549. Powered by LLaVA (Vision LLM) to generate alt-texts and validate screen elements. Built as part of an MSc AI project and evolved into a funded startup.",
     "tech_stack": "Python, FastAPI, Appium, ADB, Bash, Android Emulator, DigitalOcean, LLaVA",
-    "image": "/project_images/auditsu_preview.png",
+    "image": "/project_images/auditsu_preview_1.jpeg",
     "github_link": "https://github.com/anzerkhan/auditsu",
     "live_link": "https://auditsu.anzerkhan.dev"
   },
