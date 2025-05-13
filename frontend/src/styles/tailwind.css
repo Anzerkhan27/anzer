@@ -5,3 +5,9 @@
 html {
   scroll-behavior: smooth;
 }
+
+/* Optional: Apply globally */
+body {
+  font-family: 'Inter', sans-serif;
+}
+
