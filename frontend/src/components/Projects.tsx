@@ -21,7 +21,7 @@ const Projects = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('http://127.0.0.1:8000/api/projects/')
+    fetch('/projects.json')
       .then((res) => res.json())
       .then((data) => {
         const enriched: Project[] = data.map((project: any) => ({
@@ -41,10 +41,11 @@ const Projects = () => {
         setAllTags(['All', ...Array.from(tags).sort()]);
       })
       .catch((err) => {
-        console.error('Error fetching projects:', err);
+        console.error('Error loading static projects.json:', err);
         setLoading(false);
       });
   }, []);
+
 
   useEffect(() => {
     const q = query.toLowerCase();
