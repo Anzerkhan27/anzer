@@ -15,9 +15,9 @@ const Hero = () => {
         <p className="text-xl md:text-2xl text-gray-300 mb-6">
           <Typewriter
             words={[
-              'Full-Stack Engineer',
-              'AI & Accessibility Innovator',
-              'Space Software Dev',
+              'Python Developer',
+              'Backend Systems Engineer',
+              'AI/ML Solutions Builder',
             ]}
             loop={0}
             cursor
@@ -29,11 +29,10 @@ const Hero = () => {
         </p>
 
         <p className="text-md md:text-lg text-gray-400 mb-8">
-          I build accessible, performant systems — from AI-driven accessibility platforms
-          to mission software for autonomous rovers.
+          I specialize in building reliable backend systems and intelligent automation tools — combining Python, ML, and modern web frameworks to solve real-world challenges.
         </p>
 
-        {/* 👇 Contact Icons Bar */}
+        {/* Contact Icons */}
         <div className="flex justify-center gap-6 mb-8">
           <a
             href="https://linkedin.com/in/anzer-khan-31a14a209"
@@ -62,7 +61,7 @@ const Hero = () => {
           </a>
         </div>
 
-        {/* 👇 Action Buttons */}
+        {/* CTA Buttons */}
         <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-10">
           <a
             href="#projects"
@@ -71,26 +70,26 @@ const Hero = () => {
             View My Work
           </a>
           <a
-            href="/CV_Anzer.pdf" // Replace with actual path or drive link
+            href="/CV_Anzer.pdf"
             className="px-6 py-3 border border-white text-white font-semibold rounded-lg hover:bg-white hover:text-black transition"
           >
             Download CV
           </a>
         </div>
 
-        {/* 👇 Achievement Stats */}
+        {/* Experience Stats */}
         <div className="flex justify-center gap-8 text-gray-400 text-sm sm:text-base">
           <div>
-            <span className="block text-white text-xl font-bold">3+</span>
+            <span className="block text-white text-xl font-bold">2+</span>
             Years Experience
           </div>
           <div>
-            <span className="block text-white text-xl font-bold">8+</span>
-            Projects
+            <span className="block text-white text-xl font-bold">5+</span>
+             Projects
           </div>
           <div>
-            <span className="block text-white text-xl font-bold">4</span>
-            Published Tools
+            <span className="block text-white text-xl font-bold">3</span>
+            Production Systems
           </div>
         </div>
       </div>
