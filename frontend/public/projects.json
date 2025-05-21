@@ -44,4 +44,15 @@
     "github_link": "https://github.com/AnzerKhan27/ebook-library-laravel",
     "live_link": "https://ebook-laravel-final-production.up.railway.app"
   }
+,
+  {
+  "id": 6,
+  "title": "DTS Developer Challenge – HMCTS Caseworker Task Manager",
+  "description": "A full-stack caseworker task manager built for the HMCTS developer challenge. Features a FastAPI backend with full RESTful CRUD, CI/CD via GitHub Actions, and a GOV.UK-inspired React + TypeScript frontend styled using Tailwind CSS. Includes features like UUID-based task handling, SQLite/PostgreSQL DB fallback, real-time filtering, modals, and collapsible forms. Deployed on Railway (backend) and Cloudflare Pages (frontend).",
+  "tech_stack": "FastAPI, React, TypeScript, Tailwind CSS, SQLAlchemy, PostgreSQL, SQLite, GitHub Actions, Railway, Cloudflare Pages",
+  "image": "/project_images/dts_challenge_preview.png",
+  "github_link": "https://github.com/Anzerkhan27/dts-developer-challenge",
+  "live_link": "https://dts-developer-challenge.pages.dev"
+}
+
 ]
